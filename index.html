@@ -1702,7 +1702,7 @@
     <div class="cta-form reveal">
       <h3>Operational Inquiry</h3>
       <p>Field evaluation participation — active SAR units only</p>
-      <form action="mailto:brian.skyberg@gmail.com" method="POST" enctype="text/plain">
+      <form id="inquiry-form">
         <div class="form-group">
           <label>Team Name</label>
           <input type="text" name="Team Name" required>
@@ -1724,12 +1724,12 @@
           <textarea name="Message" rows="4"></textarea>
         </div>
 
-        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; font-size: 11px; padding: 14px;">
+        <button type="submit" class="btn-primary" id="inquiry-submit" style="width: 100%; justify-content: center; font-size: 11px; padding: 14px;">
           Submit Team Interest
         </button>
 
-        <p class="form-note">
-          Submissions are routed through your default email client for direct evaluation coordination follow-up.
+        <p class="form-note" id="inquiry-status">
+          Submit team details for direct evaluation coordination follow-up.
         </p>
       </form>
     </div>
@@ -1801,6 +1801,44 @@
       const target = document.querySelector(a.getAttribute('href'));
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
+  });
+
+  const inquiryForm = document.getElementById('inquiry-form');
+  const inquirySubmit = document.getElementById('inquiry-submit');
+  const inquiryStatus = document.getElementById('inquiry-status');
+
+  inquiryForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const teamName = inquiryForm.querySelector('[name="Team Name"]')?.value.trim() || '';
+    const agency = inquiryForm.querySelector('[name="Agency / Organization"]')?.value.trim() || '';
+    const location = inquiryForm.querySelector('[name="Location"]')?.value.trim() || '';
+    const contactEmail = inquiryForm.querySelector('[name="Contact Email"]')?.value.trim() || '';
+    const message = inquiryForm.querySelector('[name="Message"]')?.value.trim() || '';
+
+    inquirySubmit.disabled = true;
+    if (inquiryStatus) inquiryStatus.textContent = 'Submitting inquiry...';
+
+    try {
+      const response = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ teamName, agency, location, contactEmail, message })
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok || result.success !== true) {
+        throw new Error(result.error || 'Submission failed');
+      }
+
+      inquiryForm.reset();
+      if (inquiryStatus) inquiryStatus.textContent = 'Submission received. The SAR Vision team will follow up directly.';
+    } catch (error) {
+      if (inquiryStatus) inquiryStatus.textContent = 'Unable to submit right now. Please try again shortly.';
+    } finally {
+      inquirySubmit.disabled = false;
+    }
   });
 
   const lightbox = document.getElementById('image-lightbox');

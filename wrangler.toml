@@ -1,0 +1,7 @@
+name = "sarvision-inquiry-api"
+main = "worker.js"
+compatibility_date = "2026-02-19"
+
+[vars]
+INQUIRY_RECIPIENT = "brian.skyberg@gmail.com"
+SENDER_EMAIL = "no-reply@sar.vision"
