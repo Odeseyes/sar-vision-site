@@ -1,5 +1,6 @@
 export async function onRequestPost(context) {
   try {
+    const { env } = context;
     const data = await context.request.json();
 
     const { teamName, agency, location, contactEmail, message } = data;
@@ -11,75 +12,33 @@ export async function onRequestPost(context) {
       );
     }
 
-    const email = contactEmail;
-
-    const emailPayload = {
-      personalizations: [
-        {
-          to: [{ email: "brian.skyberg@gmail.com" }]
-        }
-      ],
-      from: {
-        email: "no-reply@sar.vision",
-        name: "SAR Vision Inquiry"
-      },
-      subject: "New SAR Vision Operational Inquiry",
-      content: [
-        {
-          type: "text/plain",
-          value:
-`Team Name: ${teamName}
-Agency: ${agency || ""}
-Location: ${location || ""}
-Contact Email: ${contactEmail}
-Message:
-${message || ""}`
-        }
-      ]
-    };
-
-    const response = await fetch("https://api.mailchannels.net/tx/v1/send", {
+    const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "X-MailChannels-Sender": JSON.stringify({
-          name: "SAR Vision",
-          email: "no-reply@sar.vision"
-        })
+        "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: "brian.skyberg@gmail.com" }]
-          }
-        ],
-        from: {
-          name: "SAR Vision",
-          email: "no-reply@sar.vision"
-        },
-        subject: `New SAR Vision Inquiry — ${teamName}`,
-        content: [
-          {
-            type: "text/plain",
-            value:
-`Team: ${teamName}
-Agency: ${agency}
-Location: ${location}
-Email: ${email}
-
-Message:
-${message}`
-          }
-        ]
+        from: "SAR Vision <no-reply@sar.vision>",
+        to: "brian.skyberg@gmail.com",
+        subject: `SAR Vision Inquiry - ${teamName}`,
+        reply_to: contactEmail,
+        html: `
+      <h2>New SAR Vision Inquiry</h2>
+      <p><strong>Team:</strong> ${teamName}</p>
+      <p><strong>Agency:</strong> ${agency}</p>
+      <p><strong>Location:</strong> ${location}</p>
+      <p><strong>Email:</strong> ${contactEmail}</p>
+      <p><strong>Message:</strong></p>
+      <p>${message}</p>
+    `
       })
     });
 
-    const responseText = await response.text();
-    console.log("MailChannels status:", response.status);
-    console.log("MailChannels response:", responseText);
-
-    if (!response.ok) {
-      throw new Error("Mail send failed");
+    if (!resendResponse.ok) {
+      const errorText = await resendResponse.text();
+      console.log("Resend error:", errorText);
+      throw new Error("Resend send failed");
     }
 
     return new Response(
