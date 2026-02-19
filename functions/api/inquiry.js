@@ -36,10 +36,13 @@ ${message || ""}`
       ]
     };
 
+    const emailBody = emailPayload.content[0].value;
+
     const mailResponse = await fetch("https://api.mailchannels.net/tx/v1/send", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-MailChannels-Sender": "no-reply@sar.vision"
       },
       body: JSON.stringify({
         personalizations: [
@@ -51,31 +54,22 @@ ${message || ""}`
           email: "no-reply@sar.vision",
           name: "SAR Vision"
         },
-        subject: `New SAR Vision Inquiry from ${teamName}`,
+        subject: "New SAR Vision Operational Inquiry",
         content: [
           {
             type: "text/plain",
-            value: `
-Team Name: ${teamName}
-Agency: ${agency}
-Location: ${location}
-Contact Email: ${contactEmail}
-
-Message:
-${message}
-        `
+            value: emailBody
           }
         ]
       })
     });
 
+    const responseText = await mailResponse.text();
+
     if (!mailResponse.ok) {
-      const errorText = await mailResponse.text();
-      console.log("MailChannels error:", errorText);
-      return new Response(
-        JSON.stringify({ error: "Mail send failed" }),
-        { status: 500 }
-      );
+      console.log("MailChannels status:", mailResponse.status);
+      console.log("MailChannels response:", responseText);
+      throw new Error("Mail send failed");
     }
 
     return new Response(
