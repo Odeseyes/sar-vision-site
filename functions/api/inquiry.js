@@ -19,37 +19,47 @@ export async function onRequestPost(context) {
       )
     }
 
-    const emailPayload = {
-      personalizations: [
-        {
-          to: [{ email: "brian.skyberg@gmail.com" }],
-          subject: "SAR Vision Operational Inquiry"
-        }
-      ],
-      from: { email: "no-reply@sar.vision" },
-      content: [
-        {
-          type: "text/plain",
-          value: `
+    const sendResponse = await fetch("https://api.mailchannels.net/tx/v1/send", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email: "brian.skyberg@gmail.com" }],
+          },
+        ],
+        from: {
+          email: "brian.skyberg@gmail.com",
+          name: "SAR Vision Intake",
+        },
+        subject: `New SAR Vision Inquiry – ${teamName}`,
+        content: [
+          {
+            type: "text/plain",
+            value: `
 Team Name: ${teamName}
-Agency: ${agency}
-Location: ${location}
+Agency: ${agency || "N/A"}
+Location: ${location || "N/A"}
 Contact Email: ${contactEmail}
 
 Message:
-${message}
-          `
-        }
-      ]
-    }
+${message || "N/A"}
+        `,
+          },
+        ],
+      }),
+    });
 
-    await fetch("https://api.mailchannels.net/tx/v1/send", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(emailPayload)
-    })
+    if (!sendResponse.ok) {
+      const errorText = await sendResponse.text();
+      console.log("MailChannels error:", errorText);
+      return new Response(
+        JSON.stringify({ error: "Email delivery failed" }),
+        { status: 500 }
+      );
+    }
 
     return new Response(
       JSON.stringify({ success: true }),
