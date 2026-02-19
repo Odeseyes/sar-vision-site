@@ -560,6 +560,49 @@
   .detection-example:hover { border-color: var(--border-accent); }
 
   .detection-example-img { width: 100%; aspect-ratio: 16/10; background: var(--bg-deep); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .lightbox-image { cursor: zoom-in; }
+
+  .image-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(3, 8, 12, 0.78);
+    backdrop-filter: blur(3px);
+    padding: 28px;
+  }
+
+  .image-lightbox.open { display: flex; }
+
+  .image-lightbox img {
+    max-width: min(96vw, 1400px);
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    border: 1px solid var(--border-accent);
+    border-radius: 3px;
+    box-shadow: 0 18px 70px rgba(0, 0, 0, 0.65);
+    background: var(--bg-deep);
+  }
+
+  .image-lightbox-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--border);
+    background: rgba(8,12,15,0.9);
+    color: var(--text-secondary);
+    font-family: var(--mono);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .image-lightbox-close:hover { color: var(--text-primary); border-color: var(--text-secondary); }
 
   .det-placeholder { width: 100%; height: 100%; position: absolute; inset: 0; }
 
@@ -1378,30 +1421,18 @@
       <!-- Scenario 1 -->
       <div class="detection-example">
         <div class="detection-example-img">
-          <!--
-            ═══════════════════════════════════════
-            PLACEHOLDER — REPLACE WITH FIELD CAPTURE
-            Remove the .det-placeholder div below
-            and replace with:
-            <img src="./captures/scenario-01.jpg"
-                 alt="Scenario 01: subject at brushline, overhead 80m AGL"
-                 style="width:100%;height:100%;object-fit:cover;">
-            ═══════════════════════════════════════
-          -->
-          <div class="det-placeholder terrain-1">
-            <div class="det-placeholder-label">SCENARIO 01</div>
-            <div class="det-sim-box" style="top:38%;left:28%;width:36px;height:50px;" data-label="PERSON" data-conf="0.87"></div>
-            <div class="det-placeholder-icon">[ Awaiting field capture ]</div>
-          </div>
+          <img src="assets/examples/forest-trail.jpg" alt="Woodland trail detection example" class="lightbox-image" style="width:100%;height:100%;object-fit:cover;" role="button" tabindex="0" aria-label="Open larger image: Woodland trail detection example">
         </div>
         <div class="detection-example-meta">
           <div class="det-meta-row">
-            <div class="det-scenario">Subject at Brushline</div>
-            <div class="det-conf-badge">0.87 CONF</div>
+            <div class="det-scenario">Woodland Trail Environment</div>
+            <div class="det-conf-badge">Confidence: 0.80</div>
           </div>
-          <p class="det-caption">Overhead pass at approximately 80m AGL. Subject partially obscured by light vegetation at terrain edge. Untuned baseline model did not flag this frame under default confidence thresholds.</p>
+          <p class="det-caption">Subject candidate detected on a partially shaded forest trail with mixed canopy cover.</p>
           <div class="det-flag-reason">
-            <span>Flagged:</span> Upper-body silhouette visible through partial canopy — consistent with SAR training examples for prone or seated subject positions at terrain margins
+            • Dappled lighting under canopy<br>
+            • Vegetation edge contrast<br>
+            • Natural terrain pathways
           </div>
         </div>
       </div>
@@ -1409,28 +1440,18 @@
       <!-- Scenario 2 -->
       <div class="detection-example">
         <div class="detection-example-img">
-          <!--
-            ═══════════════════════════════════════
-            PLACEHOLDER — REPLACE WITH FIELD CAPTURE
-            <img src="./captures/scenario-02.jpg"
-                 alt="Scenario 02: low-contrast rocky terrain"
-                 style="width:100%;height:100%;object-fit:cover;">
-            ═══════════════════════════════════════
-          -->
-          <div class="det-placeholder terrain-2">
-            <div class="det-placeholder-label">SCENARIO 02</div>
-            <div class="det-sim-box amber-box" style="top:42%;left:52%;width:30px;height:44px;" data-label="PERSON?" data-conf="0.61"></div>
-            <div class="det-placeholder-icon">[ Awaiting field capture ]</div>
-          </div>
+          <img src="assets/examples/alpine-open.jpg" alt="Open terrain long-range detection example" class="lightbox-image" style="width:100%;height:100%;object-fit:cover;" role="button" tabindex="0" aria-label="Open larger image: Open terrain long-range detection example">
         </div>
         <div class="detection-example-meta">
           <div class="det-meta-row">
-            <div class="det-scenario">Low-Contrast Rocky Terrain</div>
-            <div class="det-conf-badge amber">0.61 CONF</div>
+            <div class="det-scenario">Open Terrain (Long Range)</div>
+            <div class="det-conf-badge amber">Confidences: 0.72 and 0.33</div>
           </div>
-          <p class="det-caption">Subject in dark clothing against dry granite and scrub. Overcast conditions, flat ambient light. Low-confidence contact surfaced under recall-first configuration rather than suppressed.</p>
+          <p class="det-caption">Two subject candidates detected across wide-field terrain at distance.</p>
           <div class="det-flag-reason">
-            <span>Flagged:</span> Edge profile and limb geometry consistent with human figure — presented for verification under recall-first threshold; below standard precision-optimized cutoff
+            • Long-range detection at reduced pixel density<br>
+            • Recall-first tuning for operator review<br>
+            • High-contrast open landscapes
           </div>
         </div>
       </div>
@@ -1438,28 +1459,18 @@
       <!-- Scenario 3 -->
       <div class="detection-example">
         <div class="detection-example-img">
-          <!--
-            ═══════════════════════════════════════
-            PLACEHOLDER — REPLACE WITH FIELD CAPTURE
-            <img src="./captures/scenario-03.jpg"
-                 alt="Scenario 03: prone subject open meadow"
-                 style="width:100%;height:100%;object-fit:cover;">
-            ═══════════════════════════════════════
-          -->
-          <div class="det-placeholder terrain-3">
-            <div class="det-placeholder-label">SCENARIO 03</div>
-            <div class="det-sim-box" style="top:30%;left:33%;width:52px;height:28px;" data-label="PERSON" data-conf="0.93"></div>
-            <div class="det-placeholder-icon">[ Awaiting field capture ]</div>
-          </div>
+          <img src="assets/examples/river-field.jpg" alt="Dense vegetation mixed terrain detection example" class="lightbox-image" style="width:100%;height:100%;object-fit:cover;" role="button" tabindex="0" aria-label="Open larger image: Dense vegetation mixed terrain detection example">
         </div>
         <div class="detection-example-meta">
           <div class="det-meta-row">
-            <div class="det-scenario">Prone Subject, Open Meadow</div>
-            <div class="det-conf-badge">0.93 CONF</div>
+            <div class="det-scenario">Dense Vegetation / Mixed Terrain</div>
+            <div class="det-conf-badge">Confidences: 0.86, 0.67, 0.28</div>
           </div>
-          <p class="det-caption">Subject in prone position in open terrain. High overhead angle produced atypical aspect ratio. Untuned baseline model did not flag this frame under default confidence thresholds; SAR-specific model flagged correctly.</p>
+          <p class="det-caption">Multiple subject candidates detected in agricultural and river-edge terrain.</p>
           <div class="det-flag-reason">
-            <span>Flagged:</span> Horizontal figure profile and color contrast against grass — pattern consistent with prone human subjects as represented in SAR aerial training data
+            • High-uniform green vegetation<br>
+            • Mixed terrain near water features<br>
+            • Low-confidence candidates surfaced for review
           </div>
         </div>
       </div>
@@ -1470,10 +1481,15 @@
       ⚠ IMPLEMENTATION NOTE — Scenario images above are representative placeholders. To add real captures: replace each .det-placeholder div with a standard &lt;img&gt; tag. Caption, confidence badge, and flag-reason structure are in place and require no additional HTML changes.
     </div>
     <p style="font-size:11px; color:var(--text-muted); margin-top:10px;">
-      Example frames shown are representative field test imagery. Performance varies based on terrain, lighting, altitude, and subject visibility.
+      Examples reflect internal evaluation footage. Performance is environment-dependent and not independently validated.
     </p>
   </div>
 </section>
+
+<div class="image-lightbox" id="image-lightbox" aria-hidden="true">
+  <button class="image-lightbox-close" id="image-lightbox-close" aria-label="Close image preview">×</button>
+  <img id="image-lightbox-img" src="" alt="Expanded detection example">
+</div>
 
 <!-- INTENDED USERS -->
 <section id="users">
@@ -1780,6 +1796,47 @@
       const target = document.querySelector(a.getAttribute('href'));
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
+  });
+
+  const lightbox = document.getElementById('image-lightbox');
+  const lightboxImage = document.getElementById('image-lightbox-img');
+  const lightboxClose = document.getElementById('image-lightbox-close');
+  const previewImages = document.querySelectorAll('.lightbox-image');
+
+  const openLightbox = (img) => {
+    if (!lightbox || !lightboxImage) return;
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt;
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox || !lightboxImage) return;
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImage.src = '';
+    document.body.style.overflow = '';
+  };
+
+  previewImages.forEach((img) => {
+    img.addEventListener('click', () => openLightbox(img));
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(img);
+      }
+    });
+  });
+
+  lightboxClose?.addEventListener('click', closeLightbox);
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox?.classList.contains('open')) closeLightbox();
   });
 
   const nav = document.querySelector('nav');
