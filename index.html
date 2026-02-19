@@ -979,7 +979,7 @@
             <div class="problem-icon">📐</div>
             <div>
               <h4>Perspective Mismatch</h4>
-              <p>General models are trained on upright figures at ground level. Aerial footage shows overhead silhouettes, foreshortened limbs, and partial figures. These models were not trained to recognize subjects from above.</p>
+              <p>General models are trained on upright figures at ground level. Aerial footage shows overhead silhouettes, foreshortened limbs, and partial figures. These models were not trained primarily on overhead aerial SAR imagery.</p>
             </div>
           </div>
           <div class="problem-item">
@@ -1000,7 +1000,7 @@
             <div class="problem-icon">⚡</div>
             <div>
               <h4>Processing Throughput</h4>
-              <p>CPU-only inference cannot maintain real-time processing of 1080p drone video on standard field equipment. Processing gaps mean a subject may be in frame during an interval that was never evaluated.</p>
+              <p>CPU-only inference typically cannot maintain stable real-time 1080p processing on standard field laptops. Processing gaps mean a subject may be in frame during an interval that was never evaluated.</p>
             </div>
           </div>
         </div>
@@ -1011,7 +1011,7 @@
           <div class="problem-callout-label">⚠ The Core Asymmetry</div>
           <blockquote>"A false positive costs an investigation team minutes. A false negative may cost the subject their life."</blockquote>
           <p>
-            Designed to prioritize recall in search-and-rescue operational contexts. This tuning strategy intentionally surfaces low-confidence detections for operator review rather than suppressing them. SAR operations invert this priority completely.
+            Designed to prioritize recall in search-and-rescue operational contexts. This tuning strategy intentionally surfaces low-confidence detections for operator review rather than suppressing them. SAR operations invert this priority.
             Verification of a false positive is a recoverable outcome. Suppression of a valid detection is not.
           </p>
           <br>
@@ -1032,7 +1032,7 @@
 
     <div class="recall-grid">
       <div class="recall-visual reveal">
-        <p class="mono" style="color: var(--text-muted); margin-bottom: 20px; letter-spacing: 2px;">DETECTION METRIC TRADE-OFF</p>
+        <p class="mono" style="color: var(--text-muted); margin-bottom: 20px; letter-spacing: 2px;">Illustrative Recall Comparison (Conceptual)</p>
 
         <div class="recall-bar-label">
           <span style="color: var(--text-muted);">Precision</span>
@@ -1041,13 +1041,13 @@
         <div class="recall-track"><div class="recall-fill recall-fill-amber" style="width: 68%"></div></div>
 
         <div class="recall-bar-label">
-          <span style="color: var(--accent);">Recall — SAR Vision (tuned)</span>
+          <span style="color: var(--accent);">Recall (Tuned for SAR) — High</span>
           <span class="val">Primary objective</span>
         </div>
         <div class="recall-track"><div class="recall-fill" style="width: 92%"></div></div>
 
         <div class="recall-bar-label">
-          <span style="color: var(--text-muted);">Recall — Base COCO (aerial)</span>
+          <span style="color: var(--text-muted);">Recall (General COCO Weights) — Reduced in aerial contexts</span>
           <span class="val" style="color: var(--text-muted);">Untuned baseline</span>
         </div>
         <div class="recall-track"><div class="recall-fill recall-fill-red" style="width: 44%"></div></div>
@@ -1104,7 +1104,7 @@
       <div class="solution-card">
         <div class="card-icon">🎯</div>
         <h4>SAR-Specific Model</h4>
-        <p>Detection model fine-tuned on annotated aerial imagery representative of search-and-rescue operational contexts — not repurposed from surveillance or autonomous vehicle training data. Trained to identify subjects from overhead perspectives in challenging terrain conditions.</p>
+        <p>Detection model fine-tuned on aerial imagery representative of SAR search conditions — not repurposed from surveillance or autonomous vehicle training data. Trained to identify subjects from overhead perspectives in challenging terrain conditions.</p>
       </div>
       <div class="solution-card">
         <div class="card-icon">🚁</div>
@@ -1175,7 +1175,7 @@
           <div class="arch-stage-content">
             <div class="arch-stage-badge">Inference Engine</div>
             <h4>Fine-Tuned Detection Model</h4>
-            <p>Custom weights derived from YOLO base architecture, fine-tuned on annotated aerial imagery representative of search-and-rescue operational contexts. Training includes overhead perspective, partial occlusion, varied terrain, and low-contrast subject presentations. GPU-accelerated via CUDA. Not standard COCO weights.</p>
+            <p>Custom weights derived from YOLO base architecture, fine-tuned on aerial imagery representative of SAR search conditions. Training includes overhead perspective, partial occlusion, varied terrain, and low-contrast subject presentations. GPU-accelerated via CUDA. Not standard COCO weights.</p>
           </div>
         </div>
 
@@ -1208,7 +1208,7 @@
           <div class="arch-specs-header">Minimum System Requirements</div>
           <div class="spec-row">
             <div class="spec-key">GPU</div>
-            <div class="spec-val"><span class="tag">REQUIRED</span>NVIDIA CUDA-capable<br>RTX 3060 or equivalent</div>
+            <div class="spec-val"><span class="tag">REQUIRED</span>NVIDIA CUDA-capable<br>RTX 3060 or equivalent<br>Performance varies by resolution and model size configuration.</div>
           </div>
           <div class="spec-row">
             <div class="spec-key">OS</div>
@@ -1404,6 +1404,12 @@
         </div>
       </div>
     </div>
+    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; margin-top:28px;">
+      The system has not yet been deployed on a confirmed live subject recovery mission.
+    </p>
+    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; margin-top:14px;">
+      Not certified for operational decision authority.
+    </p>
   </div>
 </section>
 
@@ -1411,9 +1417,11 @@
 <section id="field-demo">
   <div class="section-inner">
     <div class="section-tag">Detection Examples</div>
-    <h2 class="section-title reveal">Annotated Detection Scenarios</h2>
+    <h2 class="section-title reveal">Field Detection Examples</h2>
     <p class="section-subtitle reveal">
-      Representative detection scenarios illustrating the types of contacts SAR Vision surfaces, including the reasoning behind each flag. Annotated screenshots from active field evaluation will replace these placeholders as testing progresses.
+      Representative detection examples from internal evaluation footage processed through SAR Vision. These screenshots illustrate the types of subject candidates surfaced across varied terrain, lighting, and distance conditions.
+      <br><br>
+      All detections shown reflect recall-prioritized tuning designed to minimize missed subjects while preserving operator review control.
     </p>
 
     <div class="detection-examples stagger">
@@ -1477,9 +1485,6 @@
 
     </div>
 
-    <div class="placeholder-note reveal">
-      ⚠ IMPLEMENTATION NOTE — Scenario images above are representative placeholders. To add real captures: replace each .det-placeholder div with a standard &lt;img&gt; tag. Caption, confidence badge, and flag-reason structure are in place and require no additional HTML changes.
-    </div>
     <p style="font-size:11px; color:var(--text-muted); margin-top:10px;">
       Examples reflect internal evaluation footage. Performance is environment-dependent and not independently validated.
     </p>
@@ -1632,7 +1637,7 @@
         <div class="roadmap-phase-label">Phase 2 — In Planning</div>
         <h4>Phase 2<br>Thermal &amp; Animal Detection</h4>
         <ul>
-          <li>Thermal input — FLIR, DJI Zenmuse XT2</li>
+          <li>Thermal integration under evaluation.</li>
           <li>RGB + thermal multi-modal detection</li>
           <li>Animal detection class for wildlife SAR</li>
           <li>Heat signature flagging</li>
