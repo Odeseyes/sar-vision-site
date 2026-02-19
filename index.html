@@ -93,6 +93,51 @@
 
   .nav-cta:hover { background: var(--accent-glow); }
 
+  @media (max-width: 900px) {
+    nav { padding: 0 14px; }
+    nav::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: var(--links-left-edge, 132px);
+      width: 24px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(8,12,15,0.93), rgba(8,12,15,0));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+    nav.nav-left-fade::before { opacity: 1; }
+    nav::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 28px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(8,12,15,0), rgba(8,12,15,0.93));
+      pointer-events: none;
+    }
+    .nav-cta { display: none; }
+    .nav-logo span { font-size: 16px; letter-spacing: 1.5px; }
+
+    .nav-links {
+      flex: 1;
+      min-width: 0;
+      margin-left: 14px;
+      gap: 16px;
+      overflow-x: auto;
+      white-space: nowrap;
+      justify-content: flex-start;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links li { flex: 0 0 auto; }
+  }
+
   /* ─── HERO ─── */
   .hero {
     min-height: 100vh; padding: 120px 40px 80px;
@@ -1736,6 +1781,32 @@
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
   });
+
+  const nav = document.querySelector('nav');
+  const navLinks = document.querySelector('.nav-links');
+  const navLogo = document.querySelector('.nav-logo');
+
+  const updateNavEdgeHints = () => {
+    if (!nav || !navLinks || !navLogo) return;
+
+    if (window.innerWidth > 900) {
+      nav.classList.remove('nav-left-fade');
+      nav.style.removeProperty('--links-left-edge');
+      return;
+    }
+
+    const navRect = nav.getBoundingClientRect();
+    const logoRect = navLogo.getBoundingClientRect();
+    const leftEdge = Math.max(0, logoRect.right - navRect.left + 8);
+
+    nav.style.setProperty('--links-left-edge', `${leftEdge}px`);
+    nav.classList.toggle('nav-left-fade', navLinks.scrollLeft > 4);
+  };
+
+  navLinks?.addEventListener('scroll', updateNavEdgeHints, { passive: true });
+  window.addEventListener('resize', updateNavEdgeHints);
+  window.addEventListener('load', updateNavEdgeHints);
+  updateNavEdgeHints();
 
 </script>
 </body>
