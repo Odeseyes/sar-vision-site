@@ -41,16 +41,40 @@ ${message || ""}`
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(emailPayload)
+      body: JSON.stringify({
+        personalizations: [
+          {
+            to: [{ email: "brian.skyberg@gmail.com" }]
+          }
+        ],
+        from: {
+          email: "no-reply@sar.vision",
+          name: "SAR Vision"
+        },
+        subject: `New SAR Vision Inquiry from ${teamName}`,
+        content: [
+          {
+            type: "text/plain",
+            value: `
+Team Name: ${teamName}
+Agency: ${agency}
+Location: ${location}
+Contact Email: ${contactEmail}
+
+Message:
+${message}
+        `
+          }
+        ]
+      })
     });
 
     if (!mailResponse.ok) {
       const errorText = await mailResponse.text();
       console.log("MailChannels error:", errorText);
-
       return new Response(
-        JSON.stringify({ success: false, error: "Email send failed" }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
+        JSON.stringify({ error: "Mail send failed" }),
+        { status: 500 }
       );
     }
 
