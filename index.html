@@ -215,7 +215,7 @@
   }
 
   @media (min-width: 1101px) {
-    .hero-inner { padding-right: 540px; }
+    .hero-inner { padding-right: 600px; }
     .hero-copy { max-width: 680px; }
   }
 
@@ -272,90 +272,29 @@
 
   /* Detection visual */
   .detection-demo {
-    position: absolute; right: -20px; top: 50%;
-    transform: translateY(-50%); width: 480px; opacity: 0.85;
+    position: absolute; right: -20px; top: 46%;
+    transform: translateY(-50%); width: 576px; opacity: 1;
     animation: fadeUp 0.8s 0.3s ease both; z-index: 1;
   }
 
   @media (min-width: 1101px) {
-    .detection-demo { right: 0; top: 46%; width: min(460px, 36vw); }
+    .detection-demo { right: 0; top: 42%; width: min(552px, 43vw); }
   }
 
   @media (min-width: 1101px) and (max-height: 900px) {
-    .detection-demo { top: 43%; width: min(420px, 34vw); }
+    .detection-demo { top: 39%; width: min(504px, 40vw); }
   }
 
   @media (max-width: 1100px) { .detection-demo { display: none; } }
 
-  .detection-frame {
-    width: 100%; background: #060a0d;
-    border: 1px solid rgba(0,188,140,0.2); border-radius: 4px;
-    overflow: hidden; aspect-ratio: 16/10;
+  .detection-demo img {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: zoom-in;
   }
-
-  .detection-frame-header {
-    background: rgba(0,188,140,0.08); border-bottom: 1px solid rgba(0,188,140,0.15);
-    padding: 8px 12px; display: flex; align-items: center; gap: 8px;
-    font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 1.5px;
+  .detection-demo img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 12px 48px rgba(0,0,0,0.55);
   }
-
-  .detection-frame-header span { color: var(--text-muted); margin-left: auto; }
-  .detection-canvas { padding: 16px; }
-
-  .terrain-bg {
-    width: 100%; aspect-ratio: 16/9;
-    background:
-      radial-gradient(ellipse at 30% 60%, rgba(40,55,30,0.8) 0%, transparent 50%),
-      radial-gradient(ellipse at 70% 30%, rgba(35,48,25,0.6) 0%, transparent 45%),
-      linear-gradient(160deg, #1a2210 0%, #0f1a08 40%, #141f0d 100%);
-    position: relative; border-radius: 2px; overflow: hidden;
-  }
-
-  .terrain-texture {
-    position: absolute; inset: 0;
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
-  }
-
-  .det-box {
-    position: absolute; border: 2px solid var(--accent); border-radius: 1px;
-    animation: boxPulse 2.5s ease-in-out infinite;
-  }
-
-  .det-box::before {
-    content: attr(data-label); position: absolute; top: -20px; left: -1px;
-    font-family: var(--mono); font-size: 9px; color: var(--bg-deep);
-    background: var(--accent); padding: 1px 5px; white-space: nowrap; letter-spacing: 1px;
-  }
-
-  .det-box::after {
-    content: attr(data-conf); position: absolute; bottom: -20px; right: -1px;
-    font-family: var(--mono); font-size: 9px; color: var(--accent); letter-spacing: 1px;
-  }
-
-  .det-box-amber { border-color: var(--amber); }
-  .det-box-amber::before { background: var(--amber); }
-  .det-box-amber::after { color: var(--amber); }
-
-  @keyframes boxPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.75; } }
-
-  .det-box-1 { top: 28%; left: 22%; width: 40px; height: 55px; }
-  .det-box-2 { top: 52%; left: 58%; width: 34px; height: 48px; animation-delay: 0.8s; }
-  .det-box-3 { top: 18%; left: 65%; width: 30px; height: 44px; animation-delay: 1.5s; }
-
-  .crosshair { position: absolute; width: 30px; height: 30px; top: 40%; left: 40%; transform: translate(-50%, -50%); }
-  .crosshair::before, .crosshair::after { content: ''; position: absolute; background: rgba(0,188,140,0.4); }
-  .crosshair::before { width: 100%; height: 1px; top: 50%; left: 0; }
-  .crosshair::after { height: 100%; width: 1px; left: 50%; top: 0; }
-
-  .det-overlay { display: flex; gap: 12px; margin-top: 12px; }
-
-  .det-stat {
-    flex: 1; background: rgba(0,188,140,0.06);
-    border: 1px solid rgba(0,188,140,0.15); border-radius: 2px; padding: 8px 10px;
-  }
-
-  .det-stat-val { font-family: var(--mono); font-size: 14px; color: var(--accent); font-weight: 600; }
-  .det-stat-lbl { font-family: var(--mono); font-size: 9px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
 
   /* ─── SECTION LAYOUT ─── */
   section { padding: 100px 40px; position: relative; }
@@ -569,7 +508,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    background: rgba(3, 8, 12, 0.78);
+    background: rgba(3, 8, 12, 0.85);
     backdrop-filter: blur(3px);
     padding: 28px;
   }
@@ -577,7 +516,7 @@
   .image-lightbox.open { display: flex; }
 
   .image-lightbox img {
-    max-width: min(96vw, 1400px);
+    max-width: 90vw;
     max-height: 90vh;
     width: auto;
     height: auto;
@@ -816,37 +755,15 @@
         </div>
       </div>
 
-      <!-- Detection visual (decorative) -->
+      <!-- SAR Vision v0.29 UI screenshot -->
       <div class="detection-demo">
-        <div class="detection-frame">
-          <div class="detection-frame-header">
-            SAR_VISION ◆ INFERENCE ACTIVE
-            <span>30.4 FPS</span>
-          </div>
-          <div class="detection-canvas">
-            <div class="terrain-bg">
-              <div class="terrain-texture"></div>
-              <div class="det-box det-box-1" data-label="PERSON" data-conf="0.91"></div>
-              <div class="det-box det-box-2" data-label="PERSON" data-conf="0.78"></div>
-              <div class="det-box det-box-amber det-box-3" data-label="PERSON?" data-conf="0.61"></div>
-              <div class="crosshair"></div>
-            </div>
-          </div>
-        </div>
-        <div class="det-overlay">
-          <div class="det-stat">
-            <div class="det-stat-val">3</div>
-            <div class="det-stat-lbl">Contacts</div>
-          </div>
-          <div class="det-stat">
-            <div class="det-stat-val">RTX 3060</div>
-            <div class="det-stat-lbl">GPU</div>
-          </div>
-          <div class="det-stat">
-            <div class="det-stat-val">OFFLINE</div>
-            <div class="det-stat-lbl">Mode</div>
-          </div>
-        </div>
+        <img src="assets/sar-vision-ui.png"
+             alt="SAR Vision v0.29 — detection interface showing real-time person detection on aerial footage"
+             class="lightbox-image"
+             role="button"
+             tabindex="0"
+             aria-label="Open larger image: SAR Vision v0.29 detection interface"
+             style="width: 100%; border-radius: 4px; border: 1px solid rgba(0,188,140,0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
       </div>
     </div>
   </div>
