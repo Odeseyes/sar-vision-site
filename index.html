@@ -723,19 +723,19 @@
   <div class="hero-inner">
     <div style="display: flex; gap: 80px; align-items: center; flex-wrap: wrap;">
       <div class="hero-copy">
-        <div class="hero-tag">Operational Release — Field Deployment Ready</div>
+        <div class="hero-tag">Patent Pending — AI-Powered Aerial Search Detection Platform</div>
         <h1>SAR <span class="accent">Vision</span></h1>
         <h2>Aerial Human Detection<br>for Search &amp; Rescue Teams</h2>
         <p class="hero-desc">
           SAR Vision processes drone video in real time and flags potential human contacts for operator review.
-          Designed for field conditions where connectivity is unreliable, hardware is constrained, and operational continuity is non-negotiable.
+          Designed for field conditions where connectivity is unreliable, hardware is constrained, and operational continuity is critical.
           Built to support the judgment of trained SAR personnel — not to replace it.
         </p>
         <div style="margin-top:14px; font-size:13px; color:var(--text-muted); max-width:560px;">
           Developed by Brian Skyberg, active SAR team member with field deployment experience.
         </div>
         <div style="margin-top:20px; font-size:14px; color:var(--text-secondary); max-width:560px;">
-          <strong>Current Stability Release: v0.29</strong> — Hardened for extended field deployment with fault-tolerant signal handling, resilient data persistence, and validated operational stability under sustained use.
+          <strong>Current Stability Release: v0.42</strong> — Stability-focused release with fault-tolerant signal handling, persistent data logging, and tested stability during extended field sessions.
         </div>
         <div class="hero-actions">
           <a href="#cta" class="btn-primary">Submit Team Interest</a>
@@ -745,7 +745,7 @@
         <div class="hero-capabilities">
           <div class="hero-cap">
             <div class="hero-cap-dot"></div>
-            <div class="hero-cap-text"><strong>Real-time 1080p detection</strong> demonstrated on RTX 3060-class field laptop hardware — no proprietary equipment required</div>
+            <div class="hero-cap-text"><strong>Real-time 1080p detection</strong> on standard field laptop hardware — no proprietary equipment required</div>
           </div>
           <div class="hero-cap">
             <div class="hero-cap-dot"></div>
@@ -762,14 +762,14 @@
         </div>
       </div>
 
-      <!-- SAR Vision v0.29 UI screenshot -->
+      <!-- SAR Vision v0.42 UI screenshot -->
       <div class="detection-demo">
         <img src="assets/sar-vision-ui.png"
-             alt="SAR Vision v0.29 — detection interface showing real-time person detection on aerial footage"
+             alt="SAR Vision v0.42 — detection interface showing real-time person detection on aerial footage"
              class="lightbox-image"
              role="button"
              tabindex="0"
-             aria-label="Open larger image: SAR Vision v0.29 detection interface"
+             aria-label="Open larger image: SAR Vision v0.42 detection interface"
              style="width: 100%; border-radius: 4px; border: 1px solid rgba(0,188,140,0.2); box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
       </div>
     </div>
@@ -783,11 +783,11 @@
       <div class="demo-header-left">
         <div class="section-tag" style="margin-bottom: 0;">Field Recording</div>
         <div class="demo-title">SAR Vision in Operation</div>
-        <div class="demo-subtitle">Live detection on aerial drone footage — stability release v0.29</div>
+        <div class="demo-subtitle">Live detection on aerial drone footage — stability release v0.42</div>
       </div>
       <div class="demo-header-right">
-        Model: Custom Fine-Tuned YOLO<br>
-        Inference: Local / GPU-Accelerated<br>
+        Model: Specialized SAR Detection Models<br>
+        Processing: Local / GPU-Accelerated<br>
         Connectivity: Offline — No Network
       </div>
     </div>
@@ -798,7 +798,7 @@
           <div class="demo-live-dot"></div>
           SAR_VISION ◆ DETECTION RECORDING
         </div>
-        <div class="demo-frame-topbar-right">STABILITY RELEASE v0.29 — FIELD DEPLOYMENT</div>
+        <div class="demo-frame-topbar-right">STABILITY RELEASE v0.42 — FIELD DEPLOYMENT</div>
       </div>
 
       <div class="demo-video-container">
@@ -821,8 +821,8 @@
           <div class="demo-footer-stat-lbl">Input Source</div>
         </div>
         <div class="demo-footer-stat">
-          <div class="demo-footer-stat-val">SAR Fine-Tuned</div>
-          <div class="demo-footer-stat-lbl">Model Weights</div>
+          <div class="demo-footer-stat-val">SAR-Optimized</div>
+          <div class="demo-footer-stat-lbl">Detection Models</div>
         </div>
         <div class="demo-footer-stat">
           <div class="demo-footer-stat-val">Local / Offline</div>
@@ -971,7 +971,7 @@
         <div class="recall-track"><div class="recall-fill" style="width: 92%"></div></div>
 
         <div class="recall-bar-label">
-          <span style="color: var(--text-muted);">Recall (General COCO Weights) — Reduced in aerial contexts</span>
+          <span style="color: var(--text-muted);">Recall (General-Purpose Models) — Reduced in aerial contexts</span>
           <span class="val" style="color: var(--text-muted);">Untuned baseline</span>
         </div>
         <div class="recall-track"><div class="recall-fill recall-fill-red" style="width: 44%"></div></div>
@@ -998,11 +998,11 @@
           SAR Vision is configured to surface all contacts the model considers plausible, including low-confidence candidates.
         </p>
         <p>
-          Confidence thresholds are configurable, but defaults are intentionally conservative. A detection at 0.45 confidence is presented to the operator for assessment rather than suppressed before review.
+          Confidence thresholds are configurable, but defaults are intentionally conservative. Low-confidence detections are presented to the operator for assessment rather than suppressed before review.
           The system aims to improve the likelihood that plausible contacts are not filtered before a human evaluates them.
         </p>
         <p>
-          This approach is reflected throughout: in training data selection, threshold configuration, and NMS parameter tuning — all oriented toward SAR context rather than general benchmark performance.
+          This approach is reflected throughout the detection pipeline — from model training to post-processing — all oriented toward SAR context rather than general benchmark performance.
         </p>
 
         <div class="recall-principle">
@@ -1020,7 +1020,7 @@
     <div class="section-tag">Operational Capabilities</div>
     <h2 class="section-title reveal">What SAR Vision Does</h2>
     <p class="section-subtitle reveal">
-      A single-purpose detection tool: process drone video and surface human contacts to the operator in real time.
+      An aerial search-assistance platform that detects, tracks, and logs potential human contacts for operator review in real time.
       Deployable on existing field hardware with fault-tolerant operation under unstable field conditions. No additional infrastructure required.
     </p>
 
@@ -1028,7 +1028,7 @@
       <div class="solution-card">
         <div class="card-icon">🎯</div>
         <h4>SAR-Specific Model</h4>
-        <p>Detection model fine-tuned on aerial imagery representative of SAR search conditions — not repurposed from surveillance or autonomous vehicle training data. Trained to identify subjects from overhead perspectives in challenging terrain conditions.</p>
+        <p>Purpose-built detection models designed for aerial SAR search conditions — not repurposed from surveillance or autonomous vehicle datasets. Trained to identify subjects from overhead perspectives in challenging terrain conditions.</p>
       </div>
       <div class="solution-card">
         <div class="card-icon">🚁</div>
@@ -1038,7 +1038,7 @@
       <div class="solution-card">
         <div class="card-icon">💻</div>
         <h4>Local GPU Processing</h4>
-        <p>Runs on-device using CUDA-capable GPU hardware. A mid-range field laptop with an RTX 3060 is sufficient for real-time 1080p inference. Includes GPU memory management and resource monitoring for sustained operation. All processing is local — no data leaves the device.</p>
+        <p>Runs on-device using GPU-accelerated hardware. A mid-range field laptop with a modern NVIDIA GPU is sufficient for real-time 1080p operation. Designed for stability during extended field sessions. All processing is local — no data leaves the device.</p>
       </div>
       <div class="solution-card">
         <div class="card-icon">🔍</div>
@@ -1075,7 +1075,7 @@
           <div class="arch-stage-content">
             <div class="arch-stage-badge">Input Layer</div>
             <h4>Video Ingestion</h4>
-            <p>Accepts HDMI capture (any USB capture card), RTMP endpoints from FPV or mission software, or local video files. HDMI input includes a deterministic reconnect state machine with exponential backoff and dormant fail-safe mode after reconnect limit. Frame extraction is decoupled from inference to prevent throughput bottlenecks.</p>
+            <p>Accepts HDMI capture (any USB capture card), RTMP endpoints from FPV or mission software, or local video files. Includes automatic signal recovery with fault-tolerant reconnection handling for unstable HDMI connections. Ingestion pipeline is designed to maintain throughput continuity under typical field conditions, with automatic recovery from common signal interruptions.</p>
           </div>
         </div>
 
@@ -1087,7 +1087,7 @@
           <div class="arch-stage-content">
             <div class="arch-stage-badge">Pre-Processing</div>
             <h4>Frame Preparation</h4>
-            <p>Frames normalized to model input dimensions. Optional adaptive contrast enhancement available for flat-lighting conditions common in overcast aerial environments.</p>
+            <p>Frames conditioned for detection model input. Includes environmental compensation for challenging aerial lighting conditions common in overcast and low-contrast search environments.</p>
           </div>
         </div>
 
@@ -1098,8 +1098,8 @@
           </div>
           <div class="arch-stage-content">
             <div class="arch-stage-badge">Inference Engine</div>
-            <h4>Fine-Tuned Detection Model</h4>
-            <p>Custom weights derived from YOLO base architecture, fine-tuned on aerial imagery representative of SAR search conditions. Training includes overhead perspective, partial occlusion, varied terrain, and low-contrast subject presentations. GPU-accelerated via CUDA with inference_mode protection on all detection paths and periodic CUDA cache clearing for long-duration stability. VRAM telemetry logged at 1-minute intervals. Not standard COCO weights.</p>
+            <h4>SAR Detection Engine</h4>
+            <p>Purpose-built detection models designed for aerial SAR conditions. Trained on imagery spanning overhead perspectives, partial occlusion, varied terrain, and low-contrast subject presentations. GPU-accelerated with resource management designed for extended operational sessions. Not general-purpose models.</p>
           </div>
         </div>
 
@@ -1111,7 +1111,7 @@
           <div class="arch-stage-content">
             <div class="arch-stage-badge">Post-Processing</div>
             <h4>Detection Output &amp; Logging</h4>
-            <p>NMS applied with SAR-tuned parameters. Contacts above configurable thresholds annotated on live feed. All events logged via crash-safe CSV persistence (atomic writes + fsync) with timestamp and frame reference. Video output uses segmented writing with continuity across signal interruptions. Disk-pressure monitoring with rotation IOError hardening.</p>
+            <p>Detection post-processing tuned for SAR operational context. Contacts above configurable thresholds annotated on live feed. All events logged with crash-tolerant persistence, timestamp, and frame reference for post-mission review. Video evidence captured with recovery handling for common signal interruptions and storage write errors.</p>
           </div>
         </div>
 
@@ -1132,7 +1132,7 @@
           <div class="arch-specs-header">Minimum System Requirements</div>
           <div class="spec-row">
             <div class="spec-key">GPU</div>
-            <div class="spec-val"><span class="tag">REQUIRED</span>NVIDIA CUDA-capable<br>RTX 3060 or equivalent<br>Performance varies by resolution and model size configuration.</div>
+            <div class="spec-val"><span class="tag">REQUIRED</span>NVIDIA CUDA-capable GPU<br>Mid-range or above (e.g. laptop-class discrete GPU)<br>Performance varies by resolution and model configuration.</div>
           </div>
           <div class="spec-row">
             <div class="spec-key">OS</div>
@@ -1152,7 +1152,7 @@
           </div>
           <div class="spec-row">
             <div class="spec-key">Storage</div>
-            <div class="spec-val">~4 GB model weights + logs</div>
+            <div class="spec-val">Model data + operational logs</div>
           </div>
         </div>
 
@@ -1160,15 +1160,15 @@
           <div class="arch-specs-header">Detection Model</div>
           <div class="spec-row">
             <div class="spec-key">Architecture</div>
-            <div class="spec-val">YOLOv8 — custom fine-tuned</div>
+            <div class="spec-val">Purpose-built for aerial SAR</div>
           </div>
           <div class="spec-row">
             <div class="spec-key">Training</div>
-            <div class="spec-val">Aerial SAR imagery — not base COCO</div>
+            <div class="spec-val">Aerial SAR imagery — specialized training pipeline</div>
           </div>
           <div class="spec-row">
             <div class="spec-key">Target Class</div>
-            <div class="spec-val">Person — aerial/overhead perspective</div>
+            <div class="spec-val">Human-subject detection optimized for aerial SAR conditions</div>
           </div>
           <div class="spec-row">
             <div class="spec-key">Threshold</div>
@@ -1176,7 +1176,7 @@
           </div>
           <div class="spec-row">
             <div class="spec-key">Throughput</div>
-            <div class="spec-val">Real-time inference demonstrated on RTX 3060-class hardware at 1080p under field testing conditions</div>
+            <div class="spec-val">Real-time operation demonstrated on mid-range NVIDIA laptop hardware at 1080p under field conditions</div>
           </div>
         </div>
       </div>
@@ -1190,7 +1190,7 @@
     <div class="section-tag">Field Deployment</div>
     <h2 class="section-title reveal">Designed for<br>Field Conditions</h2>
     <p class="section-subtitle reveal">
-      SAR operations don't occur in controlled environments. SAR Vision is designed to remain operational under the constraints that actually exist during active search — unstable power, intermittent signal, disk pressure, and sustained GPU load.
+      SAR operations don't occur in controlled environments. SAR Vision is designed to remain operational under the constraints that actually exist during active search — unstable power, intermittent signal, storage pressure, and sustained compute load.
     </p>
 
     <div class="field-grid">
@@ -1206,7 +1206,7 @@
           <div class="field-feature-icon">🖥</div>
           <div>
             <h4>Standard Hardware</h4>
-            <p>Designed to run on equipment the team already carries. No specialized hardware beyond a CUDA-capable GPU. Packaging targets straightforward installation on existing field laptops.</p>
+            <p>Designed to run on equipment the team already carries. No specialized hardware beyond a supported NVIDIA GPU. Packaging targets straightforward installation on existing field laptops.</p>
           </div>
         </div>
         <div class="field-feature">
@@ -1272,7 +1272,7 @@
     <div class="section-tag">Field Validation</div>
     <h2 class="section-title reveal">Operational Testing Status</h2>
     <p class="section-subtitle reveal">
-      SAR Vision has been stability-hardened and field-validated under sustained operational conditions. The following reflects the current validation state.
+      SAR Vision has been stability-tested and evaluated under sustained field conditions on portable hardware. The following reflects the current testing state.
       No performance claims are made beyond what has been directly observed and documented.
     </p>
 
@@ -1284,19 +1284,19 @@
         </div>
         <div class="validation-item">
           <div class="validation-check">✓</div>
-          <p><strong>Tested against live drone HDMI feeds.</strong> SAR Vision has been validated against real-time drone video via HDMI capture, confirming inference pipeline stability and frame throughput under field-representative conditions.</p>
+          <p><strong>Tested against live drone HDMI feeds.</strong> SAR Vision has been tested against real-time drone video via HDMI capture, demonstrating detection pipeline stability and throughput under field-representative conditions.</p>
         </div>
         <div class="validation-item">
           <div class="validation-check">✓</div>
-          <p><strong>Validated under sustained field deployment conditions.</strong> System has been run continuously on portable field hardware, confirming offline functionality, fault-tolerant signal handling, GPU stability under sustained load, and detection output during active UAV flight.</p>
+          <p><strong>Tested under sustained field deployment conditions.</strong> System has been run continuously on portable field hardware, confirming offline functionality, fault-tolerant signal handling, GPU stability under sustained load, and detection output during active UAV flight.</p>
         </div>
         <div class="validation-item">
           <div class="validation-check">✓</div>
-          <p><strong>Aerial SAR training data applied.</strong> Model weights reflect fine-tuning on annotated aerial imagery, demonstrating improved detection of overhead human figures compared to the untuned base model baseline.</p>
+          <p><strong>Specialized SAR detection models applied.</strong> Detection models are purpose-built on aerial SAR imagery, showing improved detection of overhead human figures in internal evaluation compared to general-purpose baselines.</p>
         </div>
         <div class="validation-item">
           <div class="validation-check">◎</div>
-          <p><strong>Structured agency evaluation in coordination.</strong> Formal evaluation with drone-equipped SAR units is being coordinated for operational deployment. Participating units will contribute structured operational feedback.</p>
+          <p><strong>Structured agency evaluation being explored.</strong> Formal evaluation with drone-equipped SAR units is being pursued to assess field suitability. Interested units would contribute structured operational feedback.</p>
         </div>
       </div>
 
@@ -1318,11 +1318,11 @@
             </div>
             <div class="limitation-row">
               <div class="limitation-dash">—</div>
-              <p><strong>CUDA-capable GPU is a deployment prerequisite.</strong> CPU-only hardware is not recommended for real-time deployment. This requirement must be confirmed before evaluation planning begins.</p>
+              <p><strong>NVIDIA GPU is a deployment prerequisite.</strong> CPU-only hardware is not recommended for real-time deployment. This requirement must be confirmed before evaluation planning begins.</p>
             </div>
             <div class="limitation-row">
               <div class="limitation-dash">—</div>
-              <p><strong>Continued operational refinement.</strong> SAR Vision is stability-validated and under continued improvement. Deployed units should expect periodic updates and are expected to provide structured operational feedback as part of participation.</p>
+              <p><strong>Continued operational refinement.</strong> SAR Vision has been stability-tested and is under continued improvement. Participating units should expect periodic updates and are expected to provide structured operational feedback as part of participation.</p>
             </div>
           </div>
         </div>
@@ -1377,7 +1377,7 @@
         <div class="detection-example-meta">
           <div class="det-meta-row">
             <div class="det-scenario">Open Terrain (Long Range)</div>
-            <div class="det-conf-badge amber">Confidences: 0.72 and 0.33</div>
+            <div class="det-conf-badge amber">Confidences: 0.72 and low-confidence candidate</div>
           </div>
           <p class="det-caption">Two subject candidates detected across wide-field terrain at distance.</p>
           <div class="det-flag-reason">
@@ -1396,7 +1396,7 @@
         <div class="detection-example-meta">
           <div class="det-meta-row">
             <div class="det-scenario">Dense Vegetation / Mixed Terrain</div>
-            <div class="det-conf-badge">Confidences: 0.86, 0.67, 0.28</div>
+            <div class="det-conf-badge">Confidences: 0.86, 0.67, low-confidence candidate</div>
           </div>
           <p class="det-caption">Multiple subject candidates detected in agricultural and river-edge terrain.</p>
           <div class="det-flag-reason">
@@ -1538,18 +1538,18 @@
     <div class="section-tag">Development Roadmap</div>
     <h2 class="section-title reveal">Planned Development</h2>
     <p class="section-subtitle reveal">
-      SAR Vision is operational and under continued improvement. The current stability release addresses human detection from RGB aerial video.
-      Subsequent phases are planned based on operational priority and feedback from deployed units.
+      SAR Vision is functionally complete for its current scope and under continued improvement. The current stability release addresses human detection from RGB aerial video.
+      Subsequent phases are planned based on operational priority and feedback from evaluation participants.
     </p>
 
     <div class="roadmap-phases stagger">
       <div class="roadmap-phase current">
-        <div class="roadmap-phase-label">Active — Stability Release v0.29</div>
+        <div class="roadmap-phase-label">Active — Stability Release v0.42</div>
         <h4>Phase 1<br>Human Detection</h4>
         <ul>
-          <li>Aerial person detection — fine-tuned model</li>
+          <li>Aerial person detection — SAR-optimized models</li>
           <li>HDMI, RTMP, and file input sources</li>
-          <li>Local GPU-accelerated inference</li>
+          <li>Local GPU-accelerated processing</li>
           <li>Configurable confidence thresholds</li>
           <li>Detection logging and timestamping</li>
           <li>Field laptop deployment packaging</li>
@@ -1602,7 +1602,7 @@
     <div class="cta-text reveal">
       <h2>Structured Field Evaluation</h2>
       <p>
-        SAR Vision is available for structured field deployment with qualified SAR teams. Participation is coordinated while the system continues refinement and training dataset expansion.
+        SAR Vision is available for structured field evaluation with qualified SAR teams. Participation is coordinated while the system continues refinement and training dataset expansion.
       </p>
       <p>
         This is a collaborative development phase. Participating units are expected to contribute observations on detection performance, false positive rates, field usability, and integration with existing procedures. That feedback directly determines development priorities.
@@ -1616,7 +1616,7 @@
         <ul>
           <li>Active SAR team with an established UAS program and regular drone deployment on operations</li>
           <li>Operations in environments with limited or no cellular or satellite uplink</li>
-          <li>Access to a CUDA-capable GPU laptop or workstation for evaluation</li>
+          <li>Access to an NVIDIA GPU laptop or workstation for evaluation</li>
           <li>Willingness to provide structured feedback following evaluation flights</li>
           <li>Unit operates under formal SAR jurisdiction or accreditation (county, state, federal, or recognized volunteer)</li>
         </ul>
@@ -1688,8 +1688,8 @@
       </span>
     </div>
     <div class="footer-right">
-      Stability Release v0.29<br>
-      <span style="color: var(--accent);">Field Deployment Ready</span>
+      Stability Release v0.42<br>
+      <span style="color: var(--accent);">Patent Pending</span>
     </div>
   </div>
 </footer>
