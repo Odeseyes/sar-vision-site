@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>SAR Vision — Aerial Human Detection for Search &amp; Rescue Operations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -172,11 +172,18 @@
   .nav-mobile-overlay .nav-cta-mobile:hover { background: var(--accent-glow); }
 
   @media (max-width: 900px) {
-    nav { padding: 0 14px; height: 48px; }
+    nav {
+      padding: env(safe-area-inset-top, 0) 14px 0;
+      height: calc(48px + env(safe-area-inset-top, 0));
+      background: rgba(8,12,15,1);
+      backdrop-filter: none;
+    }
     .nav-links { display: none; }
     .nav-cta { display: none; }
     .nav-logo span { font-size: 16px; letter-spacing: 1.5px; }
     .nav-hamburger { display: flex; }
+    .nav-mobile-overlay { top: calc(48px + env(safe-area-inset-top, 0)); }
+    html { scroll-padding-top: calc(60px + env(safe-area-inset-top, 0)); }
   }
 
   /* ─── HERO ─── */
