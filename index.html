@@ -30,7 +30,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; scroll-padding-top: 70px; }
 
   body {
     background: var(--bg-deep);
@@ -93,49 +93,90 @@
 
   .nav-cta:hover { background: var(--accent-glow); }
 
+  /* ─── HAMBURGER BUTTON ─── */
+  .nav-hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px; height: 36px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+    z-index: 110;
+  }
+
+  .nav-hamburger span,
+  .nav-hamburger span::before,
+  .nav-hamburger span::after {
+    display: block;
+    width: 18px; height: 2px;
+    background: var(--text-secondary);
+    border-radius: 1px;
+    transition: all 0.25s ease;
+  }
+
+  .nav-hamburger span { position: relative; }
+  .nav-hamburger span::before,
+  .nav-hamburger span::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  .nav-hamburger span::before { top: -6px; }
+  .nav-hamburger span::after { top: 6px; }
+
+  .nav-hamburger.open span { background: transparent; }
+  .nav-hamburger.open span::before { top: 0; transform: rotate(45deg); background: var(--accent); }
+  .nav-hamburger.open span::after { top: 0; transform: rotate(-45deg); background: var(--accent); }
+
+  /* ─── MOBILE OVERLAY ─── */
+  .nav-mobile-overlay {
+    display: none;
+    position: fixed;
+    top: 48px;
+    left: 0; right: 0; bottom: 0;
+    background: rgba(8,12,15,0.97);
+    backdrop-filter: blur(12px);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  .nav-mobile-overlay.open { display: flex; }
+
+  .nav-mobile-overlay a {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+    padding: 8px 0;
+  }
+
+  .nav-mobile-overlay a:hover { color: var(--accent); }
+
+  .nav-mobile-overlay .nav-cta-mobile {
+    color: var(--accent);
+    border: 1px solid var(--accent-dim);
+    padding: 10px 24px;
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+
+  .nav-mobile-overlay .nav-cta-mobile:hover { background: var(--accent-glow); }
+
   @media (max-width: 900px) {
-    nav { padding: 0 14px; }
-    nav::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: var(--links-left-edge, 132px);
-      width: 24px;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(8,12,15,0.93), rgba(8,12,15,0));
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      pointer-events: none;
-    }
-    nav.nav-left-fade::before { opacity: 1; }
-    nav::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 28px;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(8,12,15,0), rgba(8,12,15,0.93));
-      pointer-events: none;
-    }
+    nav { padding: 0 14px; height: 48px; }
+    .nav-links { display: none; }
     .nav-cta { display: none; }
     .nav-logo span { font-size: 16px; letter-spacing: 1.5px; }
-
-    .nav-links {
-      flex: 1;
-      min-width: 0;
-      margin-left: 14px;
-      gap: 16px;
-      overflow-x: auto;
-      white-space: nowrap;
-      justify-content: flex-start;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-    .nav-links::-webkit-scrollbar { display: none; }
-    .nav-links li { flex: 0 0 auto; }
+    .nav-hamburger { display: flex; }
   }
 
   /* ─── HERO ─── */
@@ -304,7 +345,7 @@
   }
 
   /* ─── SECTION LAYOUT ─── */
-  section { padding: 100px 40px; position: relative; }
+  section { padding: 100px 40px; position: relative; scroll-margin-top: 70px; }
   .section-inner { max-width: 1200px; margin: 0 auto; }
 
   .section-tag {
@@ -713,7 +754,20 @@
     <li><a href="#roadmap">Roadmap</a></li>
   </ul>
   <a href="#cta" class="nav-cta">Operational Inquiry</a>
+  <button class="nav-hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+    <span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile-overlay" id="nav-mobile-overlay" aria-hidden="true">
+  <a href="#demo">Recording</a>
+  <a href="#problem">Problem</a>
+  <a href="#solution">Capabilities</a>
+  <a href="#validation">Validation</a>
+  <a href="#users">Who It's For</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#cta" class="nav-cta-mobile">Operational Inquiry</a>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -1804,6 +1858,54 @@
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && lightbox?.classList.contains('open')) closeLightbox();
+  });
+
+  // Mobile hamburger menu
+  const hamburger = document.querySelector('.nav-hamburger');
+  const mobileOverlay = document.getElementById('nav-mobile-overlay');
+
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+  const openMobileMenu = () => {
+    hamburger?.classList.add('open');
+    mobileOverlay?.classList.add('open');
+    hamburger?.setAttribute('aria-expanded', 'true');
+    mobileOverlay?.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = scrollbarWidth + 'px';
+  };
+
+  const closeMobileMenu = () => {
+    hamburger?.classList.remove('open');
+    mobileOverlay?.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
+    mobileOverlay?.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  };
+
+  hamburger?.addEventListener('click', () => {
+    mobileOverlay?.classList.contains('open') ? closeMobileMenu() : openMobileMenu();
+  });
+
+  // Close on link tap
+  mobileOverlay?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // Close on backdrop tap (outside links)
+  mobileOverlay?.addEventListener('click', (e) => {
+    if (e.target === mobileOverlay) closeMobileMenu();
+  });
+
+  // Close on ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileOverlay?.classList.contains('open')) closeMobileMenu();
+  });
+
+  // Close on resize to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900) closeMobileMenu();
   });
 
   const nav = document.querySelector('nav');
